@@ -10,6 +10,6 @@ rm -rf pico
 mkdir -p "$USER_HOME"
 
 /usr/local/bin/pico_setup.sh
-/user/local/bin/install_picotool.sh
+/usr/local/bin/install_picotool.sh
 # /usr/local/bin/makepico.sh example
 # /bin/bash
