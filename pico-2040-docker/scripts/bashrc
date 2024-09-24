@@ -1,0 +1,2 @@
+export HOME=/home
+source /usr/local/bin/env.sh
