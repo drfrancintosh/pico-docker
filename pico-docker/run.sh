@@ -29,4 +29,4 @@ $DOCKER container rm "$PICO_CONTAINER" 2>&1 > /dev/null
 ## $PICO_IMAGE: the image to run
 ## "login.sh": the command to run in the container
 
-$DOCKER run -it --network="host" -v "$user_project:$user_project" --privileged --name "$PICO_CONTAINER" "$PICO_IMAGE"  "login.sh"
+$DOCKER run -it --network="host" -v "$user_project:$user_project" --privileged --name "$PICO_CONTAINER" "$PICO_IMAGE" /bin/bash --init-file /usr/local/bin/login.sh

@@ -1,0 +1,9 @@
+export HOME=/home
+source /usr/local/bin/env.sh
+
+alias pico_now='echo building for: $PICO_BOARD / $PICO_ARCH'
+alias pico="export PICO_BOARD=pico PICO_ARCH=rp2040 && pico_now"
+alias pico1="export PICO_BOARD=pico PICO_ARCH=rp2040 && pico_now"
+alias pico2="export PICO_BOARD=pico2 PICO_ARCH=rp2350 && pico_now"
+
+#pico2

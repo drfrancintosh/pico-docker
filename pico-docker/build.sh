@@ -5,12 +5,14 @@
 ### With the "-v" option pointing to the volume you're having trouble mounting
 # podman machine init "$DEFAULT_MACHINE" -v /Volumes/GregsGit
 
-# these are more dangerous that I thought
-# yes | podman container prune
-# yes | podman image prune
-
 # variables
 source ./env.sh
+
+function die() {
+    echo ""
+    echo "$1"
+    exit 1
+}
 
 function machine_reset() {
     VOLUME="$1"; shift
@@ -25,14 +27,6 @@ function machine_reset() {
     $DOCKER machine start
 }
 
-function machine_usb() {
-    # not working - Docker images don't readily support USB
-    $DOCKER machine stop
-    $DOCKER machine set --usb=bus=0,devnum=4
-    $DOCKER machine set --rootful
-    $DOCKER machine start
-}  
-
 function cleanup() {
     $DOCKER container rm "$PICO_CONTAINER" # delete old container
     $DOCKER image rm "$PICO_IMAGE" # delete old image
@@ -42,7 +36,12 @@ function build() {
     $DOCKER build -t "$PICO_IMAGE" . # build new image
 }
 
+# set up user home for docker image
+export USER_HOME="$1"
+if [[ "$USER_HOME" == "" ]]; then die "`basename $0` <USER_HOME> (typically \$HOME, eg... $HOME)"; fi
+cp ./scripts/env_template.sh ./scripts/env.sh
+echo "export USER_HOME=\"$USER_HOME\"" >> ./scripts/env.sh
+
 machine_reset # /Volumes/GregsGit
-# machine_usb
 cleanup
 build
