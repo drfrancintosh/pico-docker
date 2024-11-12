@@ -6,4 +6,4 @@ export PICO_PLAYGROUND_PATH="/home/pico/pico-playground"
 export PICO_SWD=DEBUGPROBE
 
 # user settings to emulate the host file system
-export USER_HOME="/Users/greg"
+#export USER_HOME="/Users/greg"
